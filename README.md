@@ -21,7 +21,7 @@ $ cd agendamentoBarbearia/app
 
 ## Instalar dependências
 ```bash
-npm i
+npm install
 ```
 
 ## Execute o aplicativo (Android)
