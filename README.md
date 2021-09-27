@@ -16,7 +16,7 @@ $ git clone https://github.com/VitoriaFelix/agendamentoBarbearia.git
 ```
 ## Ir para o repositório
 ```bash
-$ cd agendamentoBarbearia
+$ cd agendamentoBarbearia/app
 ```
 
 ## Instalar dependências
