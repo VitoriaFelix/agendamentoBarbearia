@@ -1,0 +1,31 @@
+
+
+ <p>
+ Aplicativo de agendamento de barbeiros usando React Native.
+ </p>
+
+
+## Requisitos:
+
+- NodeJS
+- NPM
+
+## Clonar o repositório
+```bash
+$ git clone https://github.com/VitoriaFelix/agendamentoBarbearia.git
+```
+## Ir para o repositório
+```bash
+$ cd agendamentoBarbearia
+```
+
+## Instalar dependências
+```bash
+npm i
+```
+
+## Execute o aplicativo (Android)
+```bash
+$ react-native run-android
+```
+---
