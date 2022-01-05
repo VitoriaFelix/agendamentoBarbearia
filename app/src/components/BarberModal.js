@@ -148,6 +148,7 @@ export default ({show, setShow, user, service}) => {
   const [selectedHour, setSelectedHour] = useState(null);
   const [listDays, setListDays] = useState([]);
   const [listHours, setListHours] = useState([]);
+  
   useEffect(() => {
     let today = new Date();
     setSelectedYear(today.getFullYear());
@@ -174,6 +175,7 @@ export default ({show, setShow, user, service}) => {
 }, [user, selectedDay]);
 
 
+
   const handleLeftDateClick = () => {
       let mountDate = new Date(selectedYear, selectedMonth, 1);
       mountDate.setMonth(mountDate.getMonth() - 1);
@@ -189,7 +191,7 @@ export default ({show, setShow, user, service}) => {
       setSelectedMonth(mountDate.getMonth());
       setSelectedDay(0);
 };
-  useEffect(() => {
+ /* useEffect(() => {
     if (user.available) {
       let daysInMonth = new Date(selectedYear, selectedMonth + 1, 0).getDate();
       let newListDays = [];
@@ -217,7 +219,41 @@ export default ({show, setShow, user, service}) => {
     }
   }, [user, selectedMonth, selectedYear]);
 
+  */
+  useEffect(() => {
+    if (user.available) {
+      const daysInMonth = new Date(
+        selectedYear,
+        selectedMonth + 1,
+        0,
+      ).getDate();
   
+      const monthDays = [...Array(daysInMonth).keys()]
+        .map(day => day + 1)
+        .map(day => {
+          const date = new Date(selectedYear, selectedMonth, day);
+          const [currentDate] = date.toISOString().split('T');
+          const weekday = days[date.getDay()];
+          const status = user.available.some(({date: userAvailableDate}) => {
+            return userAvailableDate === currentDate;
+          });
+  
+          console.log(`${currentDate}-${weekday}`);
+  
+          return {
+            id: `${currentDate}-${weekday}`,
+            status,
+            weekday,
+            number: day,
+          };
+        });
+        setSelectedDay(0);
+        setListHours([]);
+        setSelectedHour(0);
+        setListDays(monthDays);
+      }
+    }, [user, selectedMonth, selectedYear]);
+    
 
   
   
@@ -297,9 +333,11 @@ export default ({show, setShow, user, service}) => {
                         <DateList
                         horizontal={true} 
                         showsHorizontalScrollIndicator={false}>
-                            {listDays.map((item, key) => (
-                                <DateItem
-                                key={key}
+                          
+                          {listDays.map(item => (
+                              <DateItem
+                                key={item.id}
+                       
                                 onPress={() =>item.status ? setSelectedDay(item.number) : null}
                                 style={{
                                     opacity: item.status ? 1 : 0.5,
