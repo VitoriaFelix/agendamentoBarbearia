@@ -219,7 +219,7 @@ export default ({show, setShow, user, service}) => {
     }
   }, [user, selectedMonth, selectedYear]);
 
-  */
+  */ 
   useEffect(() => {
     if (user.available) {
       const daysInMonth = new Date(
